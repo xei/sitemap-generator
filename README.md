@@ -104,11 +104,11 @@ Sometimes we need to generate/update a sitemap file automatically and regularly 
 $ git clone https://github.com/xei/sitemap-generator.git
 $ cd sitemap-generator
 
-$ python3 -m venv env
+$ python -m venv env
 $ source env/bin/activate
 $ pip install -r requirements.txt
 
-$ python generate_available_products_sitemap.py $DB_USER_NAME '$DB_PASSWORD'
+$ python generate_available_products_sitemap.py $DB_NAME $DB_USER_NAME '$DB_PASSWORD'
 ```
 `DB_PASSWORD` is wrapped inside quote marks because it may be tailed with especial characters like '&'.
 

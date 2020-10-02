@@ -4,7 +4,7 @@
     
         <sitemap>
             <loc>https://www.example.com/important-pages-sitemap.xml</loc>
-            <lastmod>${LAST_MODIFICATION_DATE_IMPORTANT_PAGES}</lastmod>
+            <lastmod>2020-09-29</lastmod>
         </sitemap>
         
         <sitemap>

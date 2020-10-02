@@ -16,9 +16,9 @@ Disallow: /admin/*
 
 Sitemap: https://example.com/sitemap.xml
 ```
-If you only have one sitemap file, `https://example.com/sitemap.xml` is the address of that file although  you have to know that each sitemap file should be less that `50MB` in size and it should have `50000` urls at last. So you may need more than just one sitemap file. In this case, `https://example.com/sitemap.xml` refers to an index XML file including all sitemaps addresses.
+If you only have one sitemap file, `https://example.com/sitemap.xml` is the address of that file although  you have to know that each sitemap file should be less that `50MB` in size and it should have `50000` urls at last. So you may need more than just one sitemap file. In this case, `https://example.com/sitemap.xml` refers to a sitemap index file including all sitemaps addresses.
 
-## A sample of index XML file
+## A sample of sitemap index file
 ``` 
 <?xml version="1.0" encoding="UTF-8"?>
 
@@ -36,3 +36,63 @@ If you only have one sitemap file, `https://example.com/sitemap.xml` is the addr
         
     </sitemapindex>
 ```
+`sitemap.xml` file in the repository is quite simiar to the above, but because `daily-available-products-sitemap.xml` file is going to be generated/updated automatically, `lastmod` attribute in the second index is replaced by a variable named `${LAST_MODIFICATION_DATE_DAILY_AVAILABLE_PRODUCTS}`. We can use this variable to inject the **modification time** when updating the `daily-available-products-sitemap.xml` file automatically.
+
+`important-pages-sitemap.xml` file however is a static sitemap file that does not change regularly, so a fix date is used for it. We should update it manually when it is updating.
+
+## A sample of sitemap XML file
+Each site XML file which is indexed in the `sitemap.xml` file has a structure like bellow:
+```
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+	<url>
+		<loc>https://www.example.com/mag</loc>
+	</url>
+
+	<url>
+		<loc>https://www.example.com/about-us.html</loc>
+		<lastmod>2020-09-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+	</url>
+	
+	<url>
+		<loc>https://www.example.com/faq.html</loc>
+		<lastmod>2020-09-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.4</priority>
+	</url>
+	
+	<url>
+		<loc>https://www.inpinapp.com/jobs.html</loc>
+		<lastmod>2020-09-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+	</url>
+	
+</urlset>
+```
+`loc` is mandatory but `lastmod`, `changefreq` and `priority` are optional attributes which are not important for Google at the time. However, some web crawlwers might use them.
+
+In addition, some XHTML tags can be used to introduce canonical urls:
+````
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+	xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    
+	<url>
+		<loc>https://www.example.com/fa/product/1234</loc>
+		<lastmod>2020-09-29</lastmod>
+		<xhtml:link
+			rel="alternate"
+			hreflang="fa"
+			href="https://www.inpinapp.com/fa/product/1234"/>
+		<xhtml:link
+			rel="alternate"
+			hreflang="en"
+			href="https://www.inpinapp.com/en/product/1234"/>
+	</url>
+    
+</urlset>

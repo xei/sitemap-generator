@@ -123,6 +123,8 @@ $ curl --location --request GET 'http://www.google.com/ping?sitemap=https://exam
 ```
 Note: don't call the above API like a spammer!
 
+Note: If static contents of your site are going to be cached (e.g. by a CDN or HTTP cache), you have to clear sitemap cache after each update.
+
 <p>&nbsp;</p>
 
 ## Donation

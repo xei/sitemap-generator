@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    
+        <sitemap>
+            <loc>https://www.example.com/important-pages-sitemap.xml</loc>
+            <lastmod>${LAST_MODIFICATION_DATE_IMPORTANT_PAGES}</lastmod>
+        </sitemap>
+        
+        <sitemap>
+            <loc>https://www.example.com/daily-available-products-sitemap.xml</loc>
+            <lastmod>${LAST_MODIFICATION_DATE_DAILY_AVAILABLE_PRODUCTS}</lastmod>
+        </sitemap>
+        
+    </sitemapindex>

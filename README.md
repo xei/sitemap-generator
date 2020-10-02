@@ -1,5 +1,7 @@
 # sitemap-generator
-A template Python script responsible for generating sitemap files automatically using information from production database.
+This project contains a template Python script responsible for generating a sitemap XML files automatically using information from a database.
+
+You can tailor the script to your need and use it in an automatic job to generate and serve a sitemap automatically.
 
 ## Sitemap
 As an SEO specialist, you want all your important website/webapp pages (URLs) to be indexed by search engines, especially Google. Search engines crawlers need to see them somewhere, for example an external link from other websites can lead the crawlers to find one of your important pages and index it. In the other hand, when a search engine crawler visits a page in your site, it will traverse (and maybe index) all its internal links. If a page is rendered in a server in advance (server-side rendering), it usually contains internal links that can be found and indexed by search engines. However, if the page is going to be rendered in users browser (client-side rendering), like when you have a single-page application (SPA), there is no any pre-exist internal link and URL changes only when the user interacts with webapp (dynamic pages).
@@ -120,3 +122,6 @@ When a new sitemap XML file is generated, it must be serving from the site domai
 $ curl --location --request GET 'http://www.google.com/ping?sitemap=https://example.com/sitemap.xml'
 ```
 Note: don't call the above API like a spammer!
+
+## Donation
+Give a ⭐ if this project helped you!

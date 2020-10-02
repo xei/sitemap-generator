@@ -18,7 +18,7 @@ Sitemap: https://example.com/sitemap.xml
 ```
 If you only have one sitemap file, `https://example.com/sitemap.xml` is the address of that file although  you have to know that each sitemap file should be less that `50MB` in size and it should have `50000` urls at last. So you may need more than just one sitemap file. In this case, `https://example.com/sitemap.xml` refers to a sitemap index file including all sitemaps addresses.
 
-## A sample of sitemap index file
+### A sample of sitemap index file
 ``` 
 <?xml version="1.0" encoding="UTF-8"?>
 
@@ -40,8 +40,8 @@ If you only have one sitemap file, `https://example.com/sitemap.xml` is the addr
 
 `important-pages-sitemap.xml` file however is a static sitemap file that does not change regularly, so a fix date is used for it. We should update it manually when it is updating.
 
-## A sample of sitemap XML file
-Each site XML file which is indexed in the `sitemap.xml` file has a structure like bellow:
+### A sample of sitemap XML file
+Each site XML file which is indexed in the `sitemap.xml` has a structure like bellow:
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 
@@ -54,30 +54,30 @@ Each site XML file which is indexed in the `sitemap.xml` file has a structure li
 	<url>
 		<loc>https://www.example.com/about-us.html</loc>
 		<lastmod>2020-09-29</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        	<changefreq>monthly</changefreq>
+        	<priority>0.8</priority>
 	</url>
 	
 	<url>
 		<loc>https://www.example.com/faq.html</loc>
 		<lastmod>2020-09-29</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.4</priority>
+        	<changefreq>daily</changefreq>
+		<priority>0.4</priority>
 	</url>
 	
 	<url>
 		<loc>https://www.inpinapp.com/jobs.html</loc>
 		<lastmod>2020-09-29</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
+        	<changefreq>monthly</changefreq>
+        	<priority>0.5</priority>
 	</url>
 	
 </urlset>
 ```
-`loc` is mandatory but `lastmod`, `changefreq` and `priority` are optional attributes which are not important for Google at the time. However, some web crawlwers might use them.
+`loc` is a mandatory attribute but `lastmod`, `changefreq` and `priority` are optional attributes which are not important for Google at the time. However, some web crawlers might use them.
 
-In addition, some XHTML tags can be used to introduce canonical urls:
-````
+In addition, some XHTML tags can be used to introduce [canonical urls](https://support.google.com/webmasters/answer/189077?hl=en) (e.g. localized versions of a page):
+```
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
 	xmlns:xhtml="http://www.w3.org/1999/xhtml">
@@ -96,3 +96,27 @@ In addition, some XHTML tags can be used to introduce canonical urls:
 	</url>
     
 </urlset>
+```
+
+## Generate a sitemap file automatically from database
+Sometimes we need to generate/update a sitemap file automatically and regularly (e.g. daily) using information from production database. A python script template named `generate_available_products_sitemap.py` is provided in order to do this. Tailor it to your need and your usecase, then run it to retrieve data from database and generate the updated sitemap file.
+```
+$ git clone https://github.com/xei/sitemap-generator.git
+$ cd sitemap-generator
+
+$ python3 -m venv env
+$ source env/bin/activate
+$ pip install -r requirements.txt
+
+$ python generate_available_products_sitemap.py $DB_USER_NAME '$DB_PASSWORD'
+```
+Database password is wrapped inside quote marks because in may be tailed with especial characters like '&'.
+
+The script can be invoked from a manual/automatic `CI/CD job` or a `cron job`. A `gitlab-ci.yml` file is included to the repository in order to be used in a Gitlab CI/CD pipeline.
+
+### Ping Google to know about a change in sitemap files
+When a new sitemap XML file is generated, it must be serving from the site domain and also Google should be notified about this change. To ask Google to crawl the new sitemap files call the following API:
+```
+$ curl --location --request GET 'http://www.google.com/ping?sitemap=https://example.com/sitemap.xml'
+```
+Note: don't call the above API like a spammer!

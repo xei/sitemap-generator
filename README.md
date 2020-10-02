@@ -110,11 +110,11 @@ $ pip install -r requirements.txt
 
 $ python generate_available_products_sitemap.py $DB_USER_NAME '$DB_PASSWORD'
 ```
-Database password is wrapped inside quote marks because in may be tailed with especial characters like '&'.
+`DB_PASSWORD` is wrapped inside quote marks because it may be tailed with especial characters like '&'.
 
-The script can be invoked from a manual/automatic `CI/CD job` or a `cron job`. A `gitlab-ci.yml` file is included to the repository in order to be used in a Gitlab CI/CD pipeline.
+The script can be invoked from a manual/automatic `CI/CD job` or a `cron job`. A `gitlab-ci.yml` file is included in the repository in order to be used in a Gitlab CI/CD pipeline.
 
-### Ping Google to know about a change in sitemap files
+### Ping Google to notify about a change in sitemap files
 When a new sitemap XML file is generated, it must be serving from the site domain and also Google should be notified about this change. To ask Google to crawl the new sitemap files call the following API:
 ```
 $ curl --location --request GET 'http://www.google.com/ping?sitemap=https://example.com/sitemap.xml'

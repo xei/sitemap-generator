@@ -68,7 +68,7 @@ Each site XML file which is indexed in the `sitemap.xml` has a structure like be
 	</url>
 	
 	<url>
-		<loc>https://www.inpinapp.com/jobs.html</loc>
+		<loc>https://www.example.com/jobs.html</loc>
 		<lastmod>2020-09-29</lastmod>
         	<changefreq>monthly</changefreq>
         	<priority>0.5</priority>
@@ -90,11 +90,11 @@ In addition, some XHTML tags can be used to introduce [canonical urls](https://s
 		<xhtml:link
 			rel="alternate"
 			hreflang="fa"
-			href="https://www.inpinapp.com/fa/product/1234"/>
+			href="https://www.example.com/fa/product/1234"/>
 		<xhtml:link
 			rel="alternate"
 			hreflang="en"
-			href="https://www.inpinapp.com/en/product/1234"/>
+			href="https://www.example.com/en/product/1234"/>
 	</url>
     
 </urlset>

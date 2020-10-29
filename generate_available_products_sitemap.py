@@ -25,9 +25,17 @@ def write_urls_to_file(file, product):
 
   alternate_tags = ''
   for lang in LANGS:
-    alternate_tags += "\n\t\t<xhtml:link\n\t\t\trel=\"alternate\"\n\t\t\threflang=\"{lang}\"\n\t\t\thref=\"{href}\"/>".format(lang = lang, href = PRODUCT_DETAILS_URL.format(lang = lang, id = id))
+    alternate_tags += "\n\t\t<xhtml:link\n\t\t\trel=\"alternate\"\n\t\t\threflang=\"{lang}\"\n\t\t\thref=\"{href}\"/>".format(
+	    lang = lang,
+	    href = PRODUCT_DETAILS_URL.format(lang = lang, id = id)
+    )
 
-  file.write("\n\t<url>\n\t\t<loc>{location}</loc>\n\t\t<lastmod>{lastmod}</lastmod>{alternate_tags}\n\t</url>".format(location = PRODUCT_DETAILS_URL.format(lang = 'fa', id = id), lastmod = lastmod, alternate_tags = alternate_tags))
+  file.write(
+	  "\n\t<url>\n\t\t<loc>{location}</loc>\n\t\t<lastmod>{lastmod}</lastmod>{alternate_tags}\n\t</url>".format(
+		  location = PRODUCT_DETAILS_URL.format(lang = 'fa', id = id),
+		  lastmod = lastmod,
+		  alternate_tags = alternate_tags)
+  )
 
   global urls_count
   urls_count += 1
@@ -36,13 +44,16 @@ def write_urls_to_file(file, product):
 with open(FILE_NAME, "w") as file:
   print("File %s opened." % FILE_NAME)
 
-  file.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n\txmlns:xhtml="http://www.w3.org/1999/xhtml">')
+  file.write(
+	  '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n\txmlns:xhtml="http://www.w3.org/1999/xhtml">'
+  )
 
   try:
-    cnx = mysql.connector.connect(host=DB_HOST,
-				database=DB_NAME,
-				user=DB_USER_NAME,
-				password=DB_PASS)
+    cnx = mysql.connector.connect(
+	    host=DB_HOST,
+	    database=DB_NAME,
+	    user=DB_USER_NAME,
+	    password=DB_PASS)
     print("Connection to database established.")
 
     cursor = cnx.cursor(dictionary=True)

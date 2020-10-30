@@ -26,15 +26,15 @@ def write_urls_to_file(file, product):
   alternate_tags = ''
   for lang in LANGS:
     alternate_tags += "\n\t\t<xhtml:link\n\t\t\trel=\"alternate\"\n\t\t\threflang=\"{lang}\"\n\t\t\thref=\"{href}\"/>".format(
-	    lang = lang,
-	    href = PRODUCT_DETAILS_URL.format(lang = lang, id = id)
+	    lang=lang,
+	    href=PRODUCT_DETAILS_URL.format(lang=lang, id=id)
     )
 
   file.write(
 	  "\n\t<url>\n\t\t<loc>{location}</loc>\n\t\t<lastmod>{lastmod}</lastmod>{alternate_tags}\n\t</url>".format(
-		  location = PRODUCT_DETAILS_URL.format(lang = 'fa', id = id),
-		  lastmod = lastmod,
-		  alternate_tags = alternate_tags)
+		  location=PRODUCT_DETAILS_URL.format(lang='fa', id=id),
+		  lastmod=lastmod,
+		  alternate_tags=alternate_tags)
   )
 
   global urls_count
@@ -53,7 +53,8 @@ with open(FILE_NAME, "w") as file:
 	    host=DB_HOST,
 	    database=DB_NAME,
 	    user=DB_USER_NAME,
-	    password=DB_PASS)
+	    password=DB_PASS
+    )
     print("Connection to database established.")
 
     cursor = cnx.cursor(dictionary=True)
@@ -67,7 +68,7 @@ with open(FILE_NAME, "w") as file:
       write_urls_to_file(file, product)
 
     print('%d URLs are added.' % urls_count)
-    if urls_count > 50000:
+    if urls_count > 50_000:
       print('WARNING: each sitemap file must have at last 50000 links!')
 
   except Error as e:
